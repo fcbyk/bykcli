@@ -1,0 +1,94 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bykcli"
+dynamic = ["version", "readme"]
+description = "A lightweight, extensible collection of CLI utilities"
+requires-python = ">=3.10"
+authors = [
+    {name = "fcbyk", email = "731240932@qq.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "click>=8.0.0",
+    "psutil>=5.9.0",
+    "rich>=10.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0,<8.0.0",
+    "pytest-cov>=4.0.0,<5.0.0",
+    "commitizen",
+    "build",
+    "twine",
+]
+
+[project.scripts]
+fcbyk = "bykcli.main:main"
+byk = "bykcli.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = { find = { where = ["src"], include = ["bykcli*"], exclude = ["example*"] } }
+
+[tool.setuptools.dynamic]
+version = {attr = "bykcli.__version__"}
+readme = {file = ["README.md"], content-type = "text/markdown"}
+
+[tool.pytest.ini_options]
+testpaths = ["src/bykcli/tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=bykcli --cov-report=term-missing"
+norecursedirs = ["example", "example-*", ".git", "dist", "build"]
+
+[tool.commitizen]
+name = "cz_customize"
+version = "1.0.0a1"
+tag_format = "v$version"
+changelog_file = "CHANGELOG.md"
+bump_message = "release: v$new_version"
+version_files = [
+    "src/bykcli/__init__.py:__version__",
+    "pyproject.toml:version ="
+]
+
+[tool.commitizen.customize]
+commit_parser = '^(?P<change_type>feat|fix|refactor|docs|perf|test|style|chore)(?:\((?P<scope>[^\)]+)\))?:\s*(?P<message>.+)$'
+changelog_pattern = '^(feat|fix|refactor|docs|perf|test|style|chore)'
+change_type_order = [
+    "feat",
+    "fix",
+    "refactor",
+    "docs",
+    "style",
+    "perf",
+    "test",
+    "chore"
+]
+
+message_template = """
+{{ change_type }}{% if scope %}({{ scope }}){% endif %}: {{ message }}
+"""
+
+[tool.commitizen.customize.change_type_map]
+feat = "Features"
+fix = "Bug Fixes"
+refactor = "Refactor"
+docs = "Documentation"
+style = "Styles"
+perf = "Performance"
+test = "Tests"
+chore = "Chores"
