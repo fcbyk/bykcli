@@ -13,3 +13,8 @@ src/bykcli/web/static
 */.vitepress/cache
 node_modules
 .DS_Store
+
+dist
+.output
+docs/pnpm-lock.yaml
+.nuxt

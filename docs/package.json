@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@fcbyk/shadcn-docs-nuxt-lite": "https://pkg.pr.new/fcbyk/shadcn-docs-nuxt-lite/@fcbyk/shadcn-docs-nuxt-lite@615f510",
+    "nuxt": "^4.4.4"
+  }
+}
