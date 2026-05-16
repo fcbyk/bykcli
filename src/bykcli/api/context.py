@@ -50,7 +50,7 @@ def pass_command_context(func: F) -> F:
     return cast(F, update_wrapper(new_func, func))
 
 
-def get_command_context() -> AppContext:
+def get_app_context() -> AppContext:
     """获取当前应用上下文（用于后台进程启动等场景）。"""
     from bykcli.runtime import build_runtime
     return build_runtime()

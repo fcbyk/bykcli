@@ -1,6 +1,6 @@
 """面向子命令和插件的公开运行时 API。"""
 
-from bykcli.api.context import CommandContext, pass_command_context, get_command_context
+from bykcli.api.context import CommandContext, pass_command_context, get_app_context
 from bykcli.api.paths import (
     PathItem,
     PathProvider,
@@ -22,7 +22,7 @@ __all__ = [
     # 上下文
     "CommandContext",
     "pass_command_context",
-    "get_command_context",
+    "get_app_context",
     # 路径管理
     "PathItem",
     "PathProvider",
